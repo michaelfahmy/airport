@@ -1,24 +1,18 @@
-# README
+# UALA Airport
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements:
+* Ruby 2.6.3
+* Rails 5.2.3
+* Postgresql
+* Node ~> 11.10.0
+* Yarn ~> 1.13.0
 
-Things you may want to cover:
+## Setup
+* `yarn`
+* `bundle`
+* Configure db with your creds in `config/database.yml`
+* `rails db:create db:migrate db:seed`
+* You're good to go now ;)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Development
+Run `rails s`
