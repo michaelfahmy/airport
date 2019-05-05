@@ -16,6 +16,10 @@ gem 'turbolinks', '~> 5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'activeadmin'
+gem 'devise'
+gem 'pundit'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
