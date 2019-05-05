@@ -8,7 +8,6 @@ ActiveAdmin.register User do
     column :last_name
     column :role
     column :email
-    column :sign_in_count
     column :created_at
     actions
   end
