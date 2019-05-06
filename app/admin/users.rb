@@ -26,6 +26,7 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :role, as: :select, collection: User.roles.keys.map { |r| [r.humanize, r] }
+      f.input :time_zone
       f.input :email
       f.input :password
       f.input :password_confirmation
