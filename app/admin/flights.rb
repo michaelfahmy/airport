@@ -1,4 +1,6 @@
 ActiveAdmin.register Flight do
+  includes :airplane
+
   permit_params :number, :departure_airport, :destination_airport, :departure_time, :arrival_time, :duration, :airplane_id
 
   form do |f|
