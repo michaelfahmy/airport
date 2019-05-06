@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_05_014700) do
+ActiveRecord::Schema.define(version: 2019_05_05_021853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 2019_05_05_014700) do
     t.integer "seats_per_row"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.integer "number"
+    t.string "departure_airport"
+    t.string "destination_airport"
+    t.datetime "departure_time"
+    t.datetime "arrival_time"
+    t.integer "duration"
+    t.bigint "airplane_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["airplane_id"], name: "index_flights_on_airplane_id"
   end
 
   create_table "users", force: :cascade do |t|
