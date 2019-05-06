@@ -3,6 +3,18 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   Exclude:
     - db/schema.rb
+    - db/migrate/*
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
 
 Rails:
   Enabled: true
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 200
+
+Style/Documentation:
+  Enabled: false
