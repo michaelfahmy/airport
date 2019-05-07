@@ -1,16 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Flight, type: :model do
-  let(:airplane) { Airplane.new(model: 'Airbus 777') }
+  let(:airplane) { create(:airplane) }
 
-  subject do
-    described_class.new(airplane: airplane,
-                        number: 127,
-                        departure_airport: 'CAI',
-                        destination_airport: 'DXB',
-                        departure_time: Time.current.tomorrow,
-                        arrival_time: Time.current.tomorrow + 6.hours)
-  end
+  subject { build(:flight) }
 
   describe 'Associations' do
     it 'belongs to an Airplane' do
@@ -81,7 +74,7 @@ RSpec.describe Flight, type: :model do
 
     it 'is not valid with airplane has overlapping flight' do
       overlapping_flight = subject.dup
-      airplane.flights << overlapping_flight
+      subject.airplane.flights << overlapping_flight
       expect(subject).not_to be_valid
     end
   end

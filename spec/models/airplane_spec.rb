@@ -1,12 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Airplane, type: :model do
-  subject do
-    described_class.new(model: 'Airbus 777',
-                        business_class_rows: 6,
-                        economy_class_rows: 44,
-                        seats_per_row: 6)
-  end
+  subject { build(:airplane) }
 
   describe 'Associations' do
     it 'has many flights' do
