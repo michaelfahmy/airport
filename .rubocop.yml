@@ -10,6 +10,9 @@ AllCops:
 Rails:
   Enabled: true
 
+Layout/IndentFirstHashElement:
+  Enabled: false
+
 Metrics/BlockLength:
   Enabled: false
 
@@ -20,4 +23,7 @@ Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/Documentation:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
   Enabled: false
