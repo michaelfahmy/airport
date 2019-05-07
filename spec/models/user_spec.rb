@@ -3,6 +3,13 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   subject { build(:user) }
 
+  describe 'Associations' do
+    it 'has many reservations' do
+      association = described_class.reflect_on_association(:reservations)
+      expect(association.macro).to eq :has_many
+    end
+  end
+
   describe 'Validations' do
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
