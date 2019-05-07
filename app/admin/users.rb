@@ -16,9 +16,9 @@ ActiveAdmin.register User do
     actions
   end
 
-  filter :email
-  filter :first_name
-  filter :last_name
+  filter :email_contains
+  filter :first_name_contains
+  filter :last_name_contains
 
   form do |f|
     f.inputs do
