@@ -3,6 +3,13 @@ ActiveAdmin.register Flight do
 
   permit_params :number, :departure_airport, :destination_airport, :departure_time, :arrival_time, :duration, :airplane_id
 
+  filter :airplane, as: :select, collection: Airplane.pluck(:model, :id)
+  filter :number_equals
+  filter :departure_airport, as: :select, collection: Airports.all.map { |a| ["#{a.name} (#{a.iata})", a.iata] }
+  filter :destination_airport, as: :select, collection: Airports.all.map { |a| ["#{a.name} (#{a.iata})", a.iata] }
+  filter :departure_time
+  filter :arrival_time
+
   form do |f|
     f.inputs do
       f.input :airplane, as: :select, collection: Airplane.pluck(:model, :id)
