@@ -15,6 +15,11 @@ RSpec.describe Flight, type: :model do
       association = described_class.reflect_on_association(:reservations)
       expect(association.macro).to eq :has_many
     end
+
+    it 'has many passengers' do
+      association = described_class.reflect_on_association(:passengers)
+      expect(association.macro).to eq :has_many
+    end
   end
 
   describe 'Validations' do
