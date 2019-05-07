@@ -9,4 +9,5 @@ class Flight < ApplicationRecord
 
   validates_with Flight::DepartureTimeValidator
   validates_with Flight::ArrivalTimeValidator
+  validates_with Flight::AirplaneValidator
 end

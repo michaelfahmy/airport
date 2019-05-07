@@ -78,5 +78,11 @@ RSpec.describe Flight, type: :model do
       subject.arrival_time = subject.departure_time - 2.hours
       expect(subject).not_to be_valid
     end
+
+    it 'is not valid with airplane has overlapping flight' do
+      overlapping_flight = subject.dup
+      airplane.flights << overlapping_flight
+      expect(subject).not_to be_valid
+    end
   end
 end
