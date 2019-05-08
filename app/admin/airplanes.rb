@@ -6,7 +6,7 @@ ActiveAdmin.register Airplane do
   filter :economy_class_rows
   filter :seats_per_row
 
-  sidebar 'Flights', only: [:show, :edit] do
+  sidebar 'Flights', only: %i[show edit] do
     ul do
       li link_to 'Flights', admin_flights_path(q: { airplane_id_eq: resource.id })
     end
