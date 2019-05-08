@@ -10,4 +10,8 @@ class Flight < ApplicationRecord
   validates_with Flight::DepartureTimeValidator
   validates_with Flight::ArrivalTimeValidator
   validates_with Flight::AirplaneValidator
+
+  def available_seats
+    airplane.seats - passengers.pluck(:seat)
+  end
 end
