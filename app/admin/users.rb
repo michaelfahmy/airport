@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :first_name, :last_name, :role, :email, :password, :password_confirmation
+  permit_params :first_name, :last_name, :role, :time_zone, :email, :password, :password_confirmation
 
   scope :all
   scope :manager
