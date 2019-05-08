@@ -4,7 +4,7 @@ class Flight < ApplicationRecord
   has_many :reservations, dependent: :nullify
   has_many :passengers, through: :reservations
 
-  validates :number, :departure_time, :arrival_time, presence: true
+  validates :number, :departure_time, :arrival_time, :adult_fee, :child_fee, presence: true
   validates :departure_airport,
             :destination_airport,
             inclusion: { in: Airports.iata_codes, message: 'is not a valid airport' }

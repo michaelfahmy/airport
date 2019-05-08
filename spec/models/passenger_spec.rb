@@ -45,11 +45,6 @@ RSpec.describe Passenger, type: :model do
       expect(subject).not_to be_valid
     end
 
-    it 'is not valid without a fee' do
-      subject.fee = nil
-      expect(subject).not_to be_valid
-    end
-
     it 'is not valid with invalid seat' do
       subject.seat = 'some_invalid_seat'
       expect(subject).not_to be_valid

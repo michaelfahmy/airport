@@ -8,8 +8,7 @@ class Passenger < ApplicationRecord
   delegate :flight, to: :reservation, allow_nil: true
 
   validates :first_name, :last_name,
-            :passenger_type, :passenger_class,
-            :seat, :fee,
+            :passenger_type, :passenger_class, :seat,
             presence: true
   validates_with Passenger::SeatValidator
 end

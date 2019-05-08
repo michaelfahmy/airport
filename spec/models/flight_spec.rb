@@ -84,6 +84,16 @@ RSpec.describe Flight, type: :model do
       subject.airplane.flights << subject.dup
       expect(subject).not_to be_valid
     end
+
+    it 'is not valid without adult fee' do
+      subject.adult_fee = nil
+      expect(subject).not_to be_valid
+    end
+
+    it 'is not valid without child fee' do
+      subject.child_fee = nil
+      expect(subject).not_to be_valid
+    end
   end
 
   describe '#available_seats' do

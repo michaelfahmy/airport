@@ -29,11 +29,15 @@ Airplane.find_each do |airplane|
     destination_airport: Airports.iata_codes[rand(0...Airports.iata_codes.length)],
     departure_time: departure_time1,
     arrival_time: arrival_time1,
+    adult_fee: Faker::Number.decimal(4, 2),
+    child_fee: Faker::Number.decimal(4, 2),
   }, {
     number: rand(100..999),
     departure_airport: Airports.iata_codes[rand(0...Airports.iata_codes.length)],
     destination_airport: Airports.iata_codes[rand(0...Airports.iata_codes.length)],
     departure_time: departure_time2,
     arrival_time: arrival_time2,
+    adult_fee: Faker::Number.decimal(4, 2),
+    child_fee: Faker::Number.decimal(4, 2),
   }])
 end

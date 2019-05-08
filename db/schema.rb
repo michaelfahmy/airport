@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_224325) do
+ActiveRecord::Schema.define(version: 2019_05_08_232608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,10 +44,11 @@ ActiveRecord::Schema.define(version: 2019_05_07_224325) do
     t.string "destination_airport"
     t.datetime "departure_time"
     t.datetime "arrival_time"
-    t.integer "duration"
     t.bigint "airplane_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "adult_fee", precision: 8, scale: 2
+    t.decimal "child_fee", precision: 8, scale: 2
     t.index ["airplane_id"], name: "index_flights_on_airplane_id"
   end
 
@@ -59,7 +60,6 @@ ActiveRecord::Schema.define(version: 2019_05_07_224325) do
     t.integer "passenger_type"
     t.integer "passenger_class"
     t.string "seat"
-    t.decimal "fee"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reservation_id"], name: "index_passengers_on_reservation_id"

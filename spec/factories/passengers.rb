@@ -7,6 +7,5 @@ FactoryBot.define do
     passenger_type { 0 }
     passenger_class { 1 }
     seat { '3B' }
-    fee { '200.99' }
   end
 end
