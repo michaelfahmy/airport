@@ -4,4 +4,12 @@ class Passenger < ApplicationRecord
   enum passenger_class: { economy: 0, business: 1 }
 
   belongs_to :reservation
+
+  delegate :flight, to: :reservation, allow_nil: true
+
+  validates :first_name, :last_name,
+            :passenger_type, :passenger_class,
+            :seat, :fee,
+            presence: true
+  validates_with Passenger::SeatValidator
 end

@@ -2,6 +2,7 @@ class Flight < ApplicationRecord
   belongs_to :airplane
 
   has_many :reservations, dependent: :nullify
+  has_many :passengers, through: :reservations
 
   validates :number, :departure_time, :arrival_time, presence: true
   validates :departure_airport,
