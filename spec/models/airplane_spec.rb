@@ -35,4 +35,12 @@ RSpec.describe Airplane, type: :model do
       expect(subject).not_to be_valid
     end
   end
+
+  describe '#seats' do
+    it 'returns array of seat numbers' do
+      seats = subject.seats
+      expect(seats[0]).to eq '1A'
+      expect(seats.size).to eq((subject.business_class_rows + subject.economy_class_rows) * subject.seats_per_row)
+    end
+  end
 end

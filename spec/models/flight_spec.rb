@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Flight, type: :model do
-  let(:airplane) { create(:airplane) }
-
   subject { build(:flight) }
 
   describe 'Associations' do
@@ -83,9 +81,16 @@ RSpec.describe Flight, type: :model do
     end
 
     it 'is not valid with airplane has overlapping flight' do
-      overlapping_flight = subject.dup
-      subject.airplane.flights << overlapping_flight
+      subject.airplane.flights << subject.dup
       expect(subject).not_to be_valid
+    end
+  end
+
+  describe '#available_seats' do
+    it 'returns array of available seats only' do
+      r = create(:reservation, flight: subject)
+      create(:passenger, reservation: r, seat: '1A')
+      expect(subject.available_seats).not_to include '1A'
     end
   end
 end
