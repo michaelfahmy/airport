@@ -1,0 +1,2 @@
+class FlightPolicy < ApplicationPolicy
+end
