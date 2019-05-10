@@ -1,4 +1,4 @@
-class Api::FlightsController < Api::ApplicationController
+class Api::V1::FlightsController < Api::V1::ApplicationController
   skip_before_action :authenticate_user!
 
   def index

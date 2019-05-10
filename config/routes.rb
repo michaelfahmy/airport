@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   root 'admin/dashboard#index'
 
   namespace :api do
-    resources :flights, only: :index
+    namespace :v1 do
+      resources :flights, only: :index
+    end
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
