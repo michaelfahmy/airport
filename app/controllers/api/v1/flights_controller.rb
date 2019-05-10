@@ -8,7 +8,11 @@ class Api::V1::FlightsController < Api::V1::ApplicationController
 
   private
 
+  def scope
+    policy_scope(Flight)
+  end
+
   def load_flights
-    @flights = Flight.where('departure_time > ?', Time.current)
+    @flights = scope.where('departure_time > ?', Time.current)
   end
 end
