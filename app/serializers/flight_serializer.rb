@@ -11,4 +11,12 @@ class FlightSerializer < ActiveModel::Serializer
   attribute :duration do
     Time.at(object.arrival_time - object.departure_time).utc.strftime('%khrs %mmin')
   end
+
+  attribute :airplane do
+    {
+      model: object.airplane.model,
+      seats_cnt: object.airplane.seats.size,
+      available_seats_cnt: object.available_seats.size,
+    }
+  end
 end

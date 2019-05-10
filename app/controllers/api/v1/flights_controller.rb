@@ -13,6 +13,6 @@ class Api::V1::FlightsController < Api::V1::ApplicationController
   end
 
   def load_flights
-    @flights = scope.where('departure_time > ?', Time.current)
+    @flights = scope.includes(:airplane, :passengers).where('departure_time > ?', Time.current).order(:departure_time)
   end
 end
