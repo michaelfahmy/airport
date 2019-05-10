@@ -1,10 +1,7 @@
 class ActiveAdmin::PagePolicy < ApplicationPolicy
   def show?
-    case record.name
-    when 'Dashboard'
-      true
-    else
-      user.manager?
-    end
+    raise Pundit::NotAuthorizedError unless user.manager?
+
+    true
   end
 end
