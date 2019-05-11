@@ -3,9 +3,9 @@ FactoryBot.define do
     reservation
     first_name { 'John' }
     last_name { 'Doe' }
-    gender { 0 }
-    passenger_type { 0 }
-    passenger_class { 1 }
+    gender { 'male' }
+    passenger_type { 'adult' }
+    passenger_class { 'economy' }
     seat { '3B' }
   end
 end
