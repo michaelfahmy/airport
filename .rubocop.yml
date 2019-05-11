@@ -25,5 +25,8 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Style/TrailingCommaInArguments:
+  Enabled: false
+
 Style/TrailingCommaInHashLiteral:
   Enabled: false
