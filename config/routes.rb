@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  begin
+    ActiveAdmin.routes(self)
+  rescue ActiveAdmin::DatabaseHitDuringLoad => e
+    Rails.logger.warn "ActiveAdmin: #{e.class}: #{e}"
+  end
 
   root 'admin/dashboard#index'
 

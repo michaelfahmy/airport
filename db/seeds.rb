@@ -7,14 +7,22 @@ User.create!(
   password_confirmation: 'admin@example.com'
 )
 
-airplane_models = ['Airbus A321ceo', 'Boeing 787-8', 'Boeing 777-200ER', 'Russian A-50', 'Airbus A320neo', 'Airbus A350-900', 'B747-400', 'DC-9-10', 'DC-9-50']
-airplane_models.each do |model|
-  Airplane.create!(
-    model: model,
-    business_class_rows: rand(2..6),
-    economy_class_rows: rand(20..50),
-    seats_per_row: rand(4..9)
+AIRPLANES = ['Airbus A321ceo', 'Boeing 787-8', 'Boeing 777-200ER', 'Russian A-50', 'Airbus A320neo', 'Airbus A350-900', 'B747-400', 'DC-9-10', 'DC-9-50'].freeze
+
+3.times do |idx|
+  airline = Airline.create!(
+    name: "#{Faker::Company.unique.name} Airline",
+    currency: %w[USD EUR GBP][idx % 3]
   )
+
+  4.times do
+    airline.airplanes.create!(
+      model: AIRPLANES.sample,
+      business_class_rows: rand(2..6),
+      economy_class_rows: rand(20..50),
+      seats_per_row: rand(4..9)
+    )
+  end
 end
 
 Airplane.find_each do |airplane|
@@ -40,4 +48,23 @@ Airplane.find_each do |airplane|
     adult_fee: Faker::Number.decimal(4, 2),
     child_fee: Faker::Number.decimal(4, 2),
   }])
+end
+
+5.times do
+  flight = Flight.all.sample
+
+  Reservation.create!(
+    flight: flight,
+    user: User.all.sample,
+    passengers_attributes: (0..rand(1..10)).map do
+      {
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        gender: Passenger.genders.keys.sample,
+        passenger_type: Passenger.passenger_types.keys.sample,
+        passenger_class: Passenger.passenger_classes.keys.sample,
+        seat: flight.available_seats.sample,
+      }
+    end
+  )
 end
