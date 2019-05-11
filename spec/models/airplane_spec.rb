@@ -4,6 +4,11 @@ RSpec.describe Airplane, type: :model do
   subject { build(:airplane) }
 
   describe 'Associations' do
+    it 'belongs to airline' do
+      association = described_class.reflect_on_association(:airline)
+      expect(association.macro).to eq :belongs_to
+    end
+
     it 'has many flights' do
       association = described_class.reflect_on_association(:flights)
       expect(association.macro).to eq :has_many
@@ -13,6 +18,11 @@ RSpec.describe Airplane, type: :model do
   describe 'Validations' do
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
+    end
+
+    it 'is not valid without airline' do
+      subject.airline = nil
+      expect(subject).not_to be_valid
     end
 
     it 'is not valid without model' do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_232608) do
+ActiveRecord::Schema.define(version: 2019_05_11_151717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 2019_05_08_232608) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "airlines", force: :cascade do |t|
+    t.string "name"
+    t.string "currency", default: "EUR"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "airplanes", force: :cascade do |t|
     t.string "model"
     t.integer "business_class_rows"
@@ -36,6 +43,8 @@ ActiveRecord::Schema.define(version: 2019_05_08_232608) do
     t.integer "seats_per_row"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "airline_id"
+    t.index ["airline_id"], name: "index_airplanes_on_airline_id"
   end
 
   create_table "flights", force: :cascade do |t|
