@@ -1,5 +1,6 @@
 class Flight < ApplicationRecord
   belongs_to :airplane
+  delegate :airline, to: :airplane
 
   has_many :reservations, dependent: :nullify
   has_many :passengers, through: :reservations
