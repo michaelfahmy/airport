@@ -3,10 +3,16 @@ class FlightSerializer < ActiveModel::Serializer
              :number,
              :departure_airport,
              :destination_airport,
-             :departure_time,
-             :arrival_time,
              :adult_fee,
              :child_fee
+
+  attribute :departure_time do
+    object.departure_time.in_time_zone(scope[:current_user]&.time_zone)
+  end
+
+  attribute :arrival_time do
+    object.arrival_time.in_time_zone(scope[:current_user]&.time_zone)
+  end
 
   attribute :duration do
     Time.at(object.arrival_time - object.departure_time).utc.strftime('%khrs %mmin')

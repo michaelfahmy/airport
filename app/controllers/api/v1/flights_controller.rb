@@ -3,7 +3,7 @@ class Api::V1::FlightsController < Api::V1::ApplicationController
 
   def index
     load_flights
-    render json: @flights
+    render json: @flights, scope: { current_user: current_user }
   end
 
   private
