@@ -3,7 +3,7 @@ class Api::V1::FlightsController < Api::V1::ApplicationController
 
   def index
     load_flights
-    render json: @flights, scope: { current_user: current_user }
+    render_flights
   end
 
   private
@@ -14,5 +14,9 @@ class Api::V1::FlightsController < Api::V1::ApplicationController
 
   def load_flights
     @flights = scope.includes(:airplane, :passengers).where('departure_time > ?', Time.current).order(:departure_time)
+  end
+
+  def render_flights
+    render_json @flights, scope: { current_user: current_user }
   end
 end
