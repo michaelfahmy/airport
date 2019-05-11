@@ -1,6 +1,4 @@
 class ReservationSerializer < ActiveModel::Serializer
-  include ActionView::Helpers::NumberHelper
-
   attributes :id
 
   attribute :user
@@ -33,6 +31,6 @@ class ReservationSerializer < ActiveModel::Serializer
     object.passengers.each do |passenger|
       fees += object.flight["#{passenger.passenger_type}_fee"]
     end
-    number_to_currency(fees)
+    Money.new(fees * 100, object.flight.airline.currency).format
   end
 end
