@@ -1,0 +1,63 @@
+{
+  "published": true,
+  "name": "Destroy Reservation",
+  "end_point": "api/v1/reservations/:id",
+  "http_method": "DELETE",
+  "params": [],
+  "header": {
+    "Authentication": "<JWT not implemented yet>",
+    "Content-Type": "application/json"
+  },
+  "examples": [{
+    "request_headers": {
+      "Authentication": "<Not Implemented>",
+      "Content-Type": "application/json"
+    },
+    "response": {"id": 424,
+      "confirmation_number": "ATL8A5",
+      "user": {
+        "id": 714,
+        "name": "John Doe",
+        "email": "john@doe.com",
+        "time_zone": "Rome"
+      },
+      "flight": {
+        "id": 568,
+        "number": 127,
+        "departure_airport": "CAI",
+        "destination_airport": "DXB",
+        "adult_fee": "4599.0",
+        "child_fee": "2499.0",
+        "departure_time": "2019-05-13T13:12:38.185+02:00",
+        "arrival_time": "2019-05-13T17:12:38.186+02:00",
+        "duration": " 4hrs 01min",
+        "available_seats": [
+          "...",
+          "13E",
+          "13F",
+          "14A",
+          "14B",
+          "..."
+        ],
+        "airplane": {
+          "model": "Airbus A350-900",
+          "seats_cnt": 480,
+          "available_seats_cnt": 480
+        }
+      },
+      "passengers": [
+        {
+          "id": 1,
+          "first_name": "John",
+          "last_name": "Doe",
+          "gender": "male",
+          "passenger_type": "adult",
+          "passenger_class": "economy",
+          "seat": "3B"
+        },
+        "..."
+      ],
+      "total_fees": "€5155.02"
+    }
+  }]
+}

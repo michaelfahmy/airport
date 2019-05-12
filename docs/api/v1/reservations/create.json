@@ -1,0 +1,112 @@
+{
+  "published": true,
+  "name": "Create Reservations",
+  "end_point": "api/v1/reservations",
+  "http_method": "POST",
+  "params": [{
+    "key": "token",
+    "required": true,
+    "type": "String",
+    "description": "Represents the card used for payment, obtained with Stripe.js"
+  }, {
+    "key": "reservation[flight_id]",
+    "required": true,
+    "type": "String",
+    "description": "ID of the intended flight"
+  }, {
+    "key": "reservation[passenger_attributes][][first_name]",
+    "required": true,
+    "type": "String",
+    "description": "First name of the passenger"
+  }, {
+    "key": "reservation[passenger_attributes][][last_name]",
+    "required": true,
+    "type": "String",
+    "description": "Last name of the passenger"
+  }, {
+    "key": "reservation[passenger_attributes][][gender]",
+    "type": "String",
+    "description": "Gender of the passenger, options: ['male', 'female']"
+  }, {
+    "key": "reservation[passenger_attributes][][passenger_type]",
+    "required": true,
+    "type": "String",
+    "description": "Options: ['adult', 'child']"
+  }, {
+    "key": "reservation[passenger_attributes][][passenger_class]",
+    "required": true,
+    "type": "String",
+    "description": "Options: ['business', 'economy']"
+  }, {
+    "key": "reservation[passenger_attributes][][seat]",
+    "required": true,
+    "type": "String",
+    "description": "Prefered seat, must exist in the available seats array"
+  }],
+  "header": {
+    "Authentication": "<JWT not implemented yet>",
+    "Content-Type": "application/json"
+  },
+  "examples": [{
+    "request_headers": {
+      "Authentication": "<Not Implemented>",
+      "Content-Type": "application/json"
+    },
+    "request": {
+      "post": {
+        "token": "tok_1EZBwTGxJunNGzdUKCyvlEKF",
+        "flight_id": "32",
+        "passengers_attributes": [{
+          "first_name": "Jane",
+          "last_name": "Doe",
+          "gender": "female",
+          "passenger_type": "adult",
+          "passenger_class": "economy",
+          "seat": "10F"
+        },
+        "..."
+      ]
+      }
+    },
+    "response": {
+      "id": 424,
+      "confirmation_number": "ATL8A5",
+      "user": {
+        "id": 714,
+        "name": "John Doe",
+        "email": "john@doe.com",
+        "time_zone": "Rome"
+      },
+      "flight": {
+        "id": 568,
+        "number": 127,
+        "departure_airport": "CAI",
+        "destination_airport": "DXB",
+        "adult_fee": "4599.0",
+        "child_fee": "2499.0",
+        "departure_time": "2019-05-13T13:12:38.185+02:00",
+        "arrival_time": "2019-05-13T17:12:38.186+02:00",
+        "duration": " 4hrs 01min",
+        "available_seats": ["..."],
+        "airplane": {
+          "model": "Airbus A350-900",
+          "seats_cnt": 480,
+          "available_seats_cnt": 480
+        }
+      },
+      "passengers": [
+        {
+          "id": 1,
+          "first_name": "John",
+          "last_name": "Doe",
+          "gender": "male",
+          "passenger_type": "adult",
+          "passenger_class": "economy",
+          "seat": "3B"
+        },
+        "..."
+      ],
+      "total_fees": "€5155.02"
+    }
+  }]
+}
