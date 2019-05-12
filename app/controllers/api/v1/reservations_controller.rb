@@ -22,11 +22,12 @@ class Api::V1::ReservationsController < Api::V1::ApplicationController
 
   def destroy
     load_reservation
+    res = Reservation::CancelReservation.call(@reservation)
 
-    if @reservation.destroy
-      render_reservation
+    if res.success?
+      render_reservation res.data
     else
-      render_reservation_errors
+      render_reservation_errors res.errors
     end
   end
 

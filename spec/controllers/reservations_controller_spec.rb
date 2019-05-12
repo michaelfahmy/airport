@@ -92,20 +92,37 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
   describe 'DELETE #destroy' do
     login_user
 
+    def create_reservation
+      reservation = create(:reservation, user: subject.current_user)
+      create(:passenger, reservation: reservation)
+      create_charge(reservation)
+      reservation
+    end
+
     context 'when resource is found' do
       def destroy_request(id)
         delete :destroy, params: { id: id }
       end
 
       it 'returns http success' do
-        reservation = create(:reservation, user: subject.current_user)
+        reservation = create_reservation
         destroy_request(reservation.id)
         expect(response).to have_http_status(:success)
       end
 
       it 'destroys the resource' do
-        reservation = create(:reservation, user: subject.current_user)
+        reservation = create_reservation
         expect { destroy_request(reservation.id) }.to change(Reservation, :count).by(-1)
+      end
+
+      it 'destorys reservation charge' do
+        reservation = create_reservation
+        expect { destroy_request(reservation.id) }.to change(Charge, :count).by(-1)
+      end
+
+      it 'destorys reservation passengers' do
+        reservation = create_reservation
+        expect { destroy_request(reservation.id) }.to change(Passenger, :count).by(-1)
       end
     end
 

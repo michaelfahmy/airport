@@ -10,5 +10,12 @@ class StripeApi
         metadata: metadata,
       )
     end
+
+    def refund_charge(charge_id, amount)
+      Stripe::Refund.create(
+        charge: charge_id,
+        amount: amount,
+      )
+    end
   end
 end
