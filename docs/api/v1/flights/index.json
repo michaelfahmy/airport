@@ -1,0 +1,35 @@
+{
+  "published": true,
+  "name": "List Flights",
+  "end_point": "api/v1/flights",
+  "http_method": "GET",
+  "params": [],
+  "header": {
+    "Content-Type": "application/json"
+  },
+  "examples": [{
+    "request_headers": {
+      "Content-Type": "application/json"
+    },
+    "response": [
+      {
+        "id": 19,
+        "number": 719,
+        "departure_airport": "RCA",
+        "destination_airport": "FCO",
+        "adult_fee": "2790.02",
+        "child_fee": "7374.05",
+        "departure_time": "2019-05-15T07:45:14.000+02:00",
+        "arrival_time": "2019-05-16T00:45:14.000+02:00",
+        "duration": "17hrs 01min",
+        "available_seats": ["...", "12A", "12B", "12C", "12D", "12E", "12F", "12G", "..."],
+        "airplane": {
+          "model": "DC-9-50",
+          "seats_cnt": 282,
+          "available_seats_cnt": 282
+        }
+      },
+      "..."
+    ]
+  }]
+}
