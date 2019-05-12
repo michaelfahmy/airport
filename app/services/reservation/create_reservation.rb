@@ -21,7 +21,7 @@ class Reservation::CreateReservation
         Error.new(@charge.errors)
       end
     else
-      Error.new(@reservation.errors)
+      Error.new(@reservation.errors.full_messages)
     end
   end
 
