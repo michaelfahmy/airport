@@ -8,7 +8,6 @@
 * Yarn ~> 1.13.0
 
 ## Setup
-* `yarn`
 * `bundle`
 * Configure db with your creds in `config/database.yml`
 * `rails db:create db:migrate db:seed`
