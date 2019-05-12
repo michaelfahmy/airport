@@ -8,6 +8,8 @@ class Reservation::CancelReservation
   end
 
   def call
+    return Error.new('The flight already took off, Cannot refund!') if @reservation.flight.departure_time < Time.current
+
     @refund = Stripe::RefundCharge.call(@reservation)
 
     if @refund.success?

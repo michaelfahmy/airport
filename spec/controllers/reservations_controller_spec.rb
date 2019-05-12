@@ -124,6 +124,17 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
         reservation = create_reservation
         expect { destroy_request(reservation.id) }.to change(Passenger, :count).by(-1)
       end
+
+      context 'but flight was in the past' do
+        it 'returns http bad_request' do
+          reservation = create_reservation
+          # rubocop:disable SkipsModelValidations
+          reservation.flight.update_attribute(:departure_time, 2.days.ago)
+          # rubocop:enable SkipsModelValidations
+          destroy_request(reservation.id)
+          expect(response).to have_http_status(:bad_request)
+        end
+      end
     end
 
     context 'when resource is not found' do
