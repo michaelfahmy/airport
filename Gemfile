@@ -27,6 +27,8 @@ gem 'active_model_serializers'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'stripe'
+
 gem 'airports'
 gem 'money-rails'
 

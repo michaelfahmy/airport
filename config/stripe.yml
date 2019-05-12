@@ -1,0 +1,11 @@
+development:
+  publishable_key: pk_test_LtoZpQIMRq6dmI8psuaLLdRU00xLqnK3KM
+  secret_key: sk_test_iu8mcaFwoSTRinGKKynCC5th00jeCfG0ah
+
+test:
+  publishable_key: pk_test_LtoZpQIMRq6dmI8psuaLLdRU00xLqnK3KM
+  secret_key: sk_test_iu8mcaFwoSTRinGKKynCC5th00jeCfG0ah
+
+staging:
+
+production:
