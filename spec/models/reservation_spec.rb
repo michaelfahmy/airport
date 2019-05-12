@@ -14,6 +14,11 @@ RSpec.describe Reservation, type: :model do
       expect(t.macro).to eq :belongs_to
     end
 
+    it 'has one charge' do
+      t = described_class.reflect_on_association(:charge)
+      expect(t.macro).to eq :has_one
+    end
+
     it 'has many passengers' do
       t = described_class.reflect_on_association(:passengers)
       expect(t.macro).to eq :has_many

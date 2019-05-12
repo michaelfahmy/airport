@@ -2,6 +2,7 @@ class Reservation < ApplicationRecord
   belongs_to :flight
   belongs_to :user
 
+  has_one :charge, dependent: :destroy
   has_many :passengers, dependent: :destroy
 
   validates :confirmation_number, uniqueness: true, allow_nil: true
