@@ -10,12 +10,12 @@ class Api::V1::ReservationsController < Api::V1::ApplicationController
   end
 
   def create
-    @reservation = current_user.reservations.new(reservation_params)
+    @reservation = Reservation::CreateReservation.call(current_user, reservation_params, params[:token])
 
-    if @reservation.save
-      render_reservation :created
+    if @reservation.success?
+      render_reservation @reservation.data, :created
     else
-      render_reservation_errors
+      render_reservation_errors @reservation.errors
     end
   end
 
@@ -47,12 +47,12 @@ class Api::V1::ReservationsController < Api::V1::ApplicationController
     render_json @reservations, scope: { current_user: current_user }
   end
 
-  def render_reservation(status = :ok)
-    render_json @reservation, scope: { current_user: current_user }, status: status
+  def render_reservation(reservation = @reservation, status = :ok)
+    render_json reservation, scope: { current_user: current_user }, status: status
   end
 
-  def render_reservation_errors
-    render_errors @reservation.errors.full_messages.to_sentence
+  def render_reservation_errors(errors = @reservation.errors.full_messages)
+    render_errors errors
   end
 
   def reservation_params
