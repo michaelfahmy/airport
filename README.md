@@ -19,3 +19,6 @@ Run `rails s`
 
 ## Testing
 Run `rspec`
+
+## Docs
+Visit `/docs`
