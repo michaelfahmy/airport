@@ -13,6 +13,7 @@ class Api::V1::ReservationsController < Api::V1::ApplicationController
     @reservation = Reservation::CreateReservation.call(current_user, reservation_params, params[:token])
 
     if @reservation.success?
+      ReservationMailer.reservation_confirmed(@reservation.data).deliver_later
       render_reservation @reservation.data, :created
     else
       render_reservation_errors @reservation.errors

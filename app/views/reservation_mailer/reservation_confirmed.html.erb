@@ -1,0 +1,29 @@
+<h2 style="display: flex; justify-content: center;"><%= @reservation.flight.airline.name %></h2>
+
+<p>Hi <%= full_name(@user) %>,</p>
+<p>Your reservation with <%= @reservation.flight.airline.name %> on <strong>Flight number <%= @reservation.flight.number %></strong> has been confirmed.</p>
+<p>
+  Please, save this confirmation code for later use
+</p>
+<div style='display: flex; justify-content: center;'>
+  <strong style="background-color: #468499; color: #e7eff6; padding: 10px; border-radius: 5px"><%= @reservation.confirmation_number %></strong>
+</div>
+
+<p>
+  This reservation has <%= pluralize(@reservation.passengers.size, 'seat') %> for:
+  <ul>
+    <% @reservation.passengers.each do |passenger| %>
+      <li><%= full_name(passenger) %> on <%= passenger.seat %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  Here's a link to your payment receipt
+  <%= link_to 'Click here', @reservation.charge.receipt_url, target: '_blank' %>
+  <div>If the link above didn't work, Navigate to this url from your browser:</div>
+  <div><%= link_to @reservation.charge.receipt_url, @reservation.charge.receipt_url, target: '_blank' %></div>
+</p>
+
+<div style='border-top: 1px solid'></div>
+<div style='margin-top: 1rem'>Have a safe flight, and enjoy your trip :)</div>

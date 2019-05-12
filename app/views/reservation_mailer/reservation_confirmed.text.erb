@@ -1,0 +1,20 @@
+<%= @reservation.flight.airline.name %>
+
+Hi <%= full_name(@user) %>,
+
+Your reservation with <%= @reservation.flight.airline.name %> on Flight number <%= @reservation.flight.number %> has been confirmed.
+Please, save this confirmation code for later use
+
+>>> <%= @reservation.confirmation_number %> <<<
+
+This reservation has <%= pluralize(@reservation.passengers.size, 'seat') %> for:
+<% @reservation.passengers.each do |passenger| %>
+  - <%= full_name(passenger) %> on <%= passenger.seat %>
+<% end %>
+
+Here's a link to your payment receipt
+<%= @reservation.charge.receipt_url %>
+
+________________________________________________________________________________________________________________________
+
+Have a safe flight, and enjoy your trip :)
