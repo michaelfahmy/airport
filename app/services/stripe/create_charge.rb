@@ -1,8 +1,4 @@
-class Stripe::CreateCharge
-  def self.call(token, reservation)
-    new(token, reservation).call
-  end
-
+class Stripe::CreateCharge < ApplicationService
   def initialize(token, reservation)
     @token = token
     @reservation = reservation

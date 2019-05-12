@@ -1,8 +1,4 @@
-class Stripe::RefundCharge
-  def self.call(reservation)
-    new(reservation).call
-  end
-
+class Stripe::RefundCharge < ApplicationService
   def initialize(reservation)
     @reservation = reservation
   end

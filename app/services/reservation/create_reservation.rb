@@ -1,8 +1,4 @@
-class Reservation::CreateReservation
-  def self.call(user, reservation_params, stripe_token)
-    new(user, reservation_params, stripe_token).call
-  end
-
+class Reservation::CreateReservation < ApplicationService
   def initialize(user, reservation_params, stripe_token)
     @user = user
     @reservation_params = reservation_params

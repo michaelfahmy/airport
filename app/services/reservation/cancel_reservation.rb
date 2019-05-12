@@ -1,8 +1,4 @@
-class Reservation::CancelReservation
-  def self.call(reservation)
-    new(reservation).call
-  end
-
+class Reservation::CancelReservation < ApplicationService
   def initialize(reservation)
     @reservation = reservation
   end
