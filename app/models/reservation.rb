@@ -7,4 +7,8 @@ class Reservation < ApplicationRecord
   validates :confirmation_number, uniqueness: true, allow_nil: true
 
   accepts_nested_attributes_for :passengers
+
+  def total_fees
+    passengers.inject(0) { |fees, passenger| fees + flight["#{passenger.passenger_type}_fee"] }
+  end
 end
