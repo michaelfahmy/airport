@@ -14,6 +14,19 @@ module Stripe
 
       token['id']
     end
+
+    def create_charge(reservation)
+      ch = StripeApi.create_charge(stripe_token, 200, 'EUR', reservation: 'testing charge')
+      create(
+        :charge,
+        reservation: reservation,
+        charge_uid: ch.id,
+        amount: ch.amount,
+        currency: ch.currency,
+        status: ch.status,
+        receipt_url: ch.receipt_url,
+      )
+    end
   end
 end
 
