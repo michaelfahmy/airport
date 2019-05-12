@@ -1,29 +1,51 @@
-<h2 style="display: flex; justify-content: center;"><%= @reservation.flight.airline.name %></h2>
-
-<p>Hi <%= full_name(@user) %>,</p>
-<p>Your reservation with <%= @reservation.flight.airline.name %> on <strong>Flight number <%= @reservation.flight.number %></strong> has been confirmed.</p>
-<p>
-  Please, save this confirmation code for later use
-</p>
-<div style='display: flex; justify-content: center;'>
-  <strong style="background-color: #468499; color: #e7eff6; padding: 10px; border-radius: 5px"><%= @reservation.confirmation_number %></strong>
+<div style='display: flex; align-items: center; justify-content: center; background: #525F7F; color: #F5F5F6; height: 100px; border-radius: 5px 5px 0 0;'>
+  <h2><%= @reservation.flight.airline.name %></h2>
 </div>
 
-<p>
-  This reservation has <%= pluralize(@reservation.passengers.size, 'seat') %> for:
-  <ul>
-    <% @reservation.passengers.each do |passenger| %>
-      <li><%= full_name(passenger) %> on <%= passenger.seat %></li>
-    <% end %>
-  </ul>
-</p>
+<div style='padding: 1rem;'>
+  <p>Hi <%= full_name(@user) %>,</p>
+  <p>Your reservation with <%= @reservation.flight.airline.name %> has been confirmed.</p>
 
-<p>
-  Here's a link to your payment receipt
-  <%= link_to 'Click here', @reservation.charge.receipt_url, target: '_blank' %>
-  <div>If the link above didn't work, Navigate to this url from your browser:</div>
-  <div><%= link_to @reservation.charge.receipt_url, @reservation.charge.receipt_url, target: '_blank' %></div>
-</p>
+  <div style='background: #F7F8FC; border-radius: 5px;'>
+    <div style='display: flex; justify-content: space-between; border-bottom: 1px solid; padding: 1rem;'>
+      <div>Flight Number: <strong><%= @reservation.flight.number %></strong></div>
+      <div>Confirmation Number: <strong><%= @reservation.confirmation_number %></strong></div>
+    </div>
 
-<div style='border-top: 1px solid'></div>
-<div style='margin-top: 1rem'>Have a safe flight, and enjoy your trip :)</div>
+    <div style='border-bottom: 1px solid;'>
+      <div style='display: flex; justify-content: space-around; padding: 1rem;'>
+        <div style='display: flex; flex-direction: column; align-items: center;'>
+          <div>FROM:</div>
+          <strong><%= "#{Airports.find_by_iata_code(@reservation.flight.departure_airport).name} [#{@reservation.flight.departure_airport}]" %></strong>
+          <div style='font-size: 12px;'>Daparture Date: <%= @reservation.flight.departure_time.in_time_zone(@user.time_zone).strftime('%d %b %Y') %></div>
+          <div style='font-size: 12px;'>Daparture Time: <%= @reservation.flight.departure_time.in_time_zone(@user.time_zone).strftime('%H:%M') %></div>
+        </div>
+        <div style='display: flex; flex-direction: column; align-items: center;'>
+          <div>TO:</div>
+          <strong><%= "#{Airports.find_by_iata_code(@reservation.flight.destination_airport).name} [#{@reservation.flight.destination_airport}]" %></strong>
+          <div style='font-size: 12px;'>Arrival Date: <%= @reservation.flight.arrival_time.in_time_zone(@user.time_zone).strftime('%d %b %Y') %></div>
+          <div style='font-size: 12px;'>Arrival Time: <%= @reservation.flight.arrival_time.in_time_zone(@user.time_zone).strftime('%H:%M') %></div>
+        </div>
+      </div>
+      <div style='font-size: 10px; display: flex; justify-content: center; padding-right: 1rem'>*Dates and Times are shown in your time zone</div>
+    </div>
+
+    <div style='padding: 1rem;'>
+      <strong>FOR <%= pluralize(@reservation.passengers.size, 'PASSENGER') %>:</strong>
+      <ul>
+        <% @reservation.passengers.each do |passenger| %>
+          <li>Name: <strong><%= full_name(passenger) %></strong>, Seat: <strong><%= passenger.seat %></strong></li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+
+  <p>
+    For your payment receipt
+    <%= link_to 'Click here', @reservation.charge.receipt_url, target: '_blank' %>
+  </p>
+
+  <div style='border-top: 1px solid'></div>
+  <div style='margin-top: 1rem'>Have a safe flight, and enjoy your trip :)</div>
+</div>
