@@ -34,5 +34,11 @@ RSpec.describe Reservation, type: :model do
       subject.user = nil
       expect(subject).not_to be_valid
     end
+
+    it 'is not valid with a repeated confirmation number' do
+      create(:reservation, confirmation_number: 'A1B1C1')
+      subject.confirmation_number = 'A1B1C1'
+      expect(subject).not_to be_valid
+    end
   end
 end

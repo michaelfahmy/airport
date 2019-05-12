@@ -1,5 +1,5 @@
 class ReservationSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :confirmation_number
 
   attribute :user
   attribute :flight
