@@ -16,6 +16,13 @@ Layout/IndentFirstHashElement:
 Metrics/BlockLength:
   Enabled: false
 
+Metrics/MethodLength:
+  Max: 12
+
+Metrics/ModuleLength:
+  Exclude:
+    - app/models/concerns/currencies.rb
+
 Metrics/LineLength:
   Max: 200
 
@@ -23,6 +30,9 @@ Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/Documentation:
+  Enabled: false
+
+Style/Encoding:
   Enabled: false
 
 Style/TrailingCommaInArguments:

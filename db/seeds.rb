@@ -49,22 +49,3 @@ Airplane.find_each do |airplane|
     child_fee: Faker::Number.decimal(4, 2),
   }])
 end
-
-5.times do
-  flight = Flight.all.sample
-
-  Reservation.create!(
-    flight: flight,
-    user: User.all.sample,
-    passengers_attributes: (0..rand(1..10)).map do
-      {
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        gender: Passenger.genders.keys.sample,
-        passenger_type: Passenger.passenger_types.keys.sample,
-        passenger_class: Passenger.passenger_classes.keys.sample,
-        seat: flight.available_seats.sample,
-      }
-    end
-  )
-end

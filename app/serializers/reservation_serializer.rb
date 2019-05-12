@@ -1,5 +1,5 @@
 class ReservationSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :confirmation_number
 
   attribute :user
   attribute :flight
@@ -27,10 +27,6 @@ class ReservationSerializer < ActiveModel::Serializer
   end
 
   def total_fees
-    fees = 0.0
-    object.passengers.each do |passenger|
-      fees += object.flight["#{passenger.passenger_type}_fee"]
-    end
-    Money.new(fees * 100, object.flight.airline.currency).format
+    Money.new(object.total_fees * 100, object.flight.airline.currency).format
   end
 end
