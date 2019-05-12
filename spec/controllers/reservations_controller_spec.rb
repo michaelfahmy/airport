@@ -61,7 +61,7 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
 
     context 'when resource is valid' do
       def create_request
-        post :create, params: { reservation: { flight_id: flight.id, passengers_attributes: [attributes_for(:passenger)] } }
+        post :create, params: { token: stripe_token, reservation: { flight_id: flight.id, passengers_attributes: [attributes_for(:passenger)] } }
       end
 
       it 'returns http created' do
@@ -76,7 +76,14 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
 
     context 'when resource is not valid' do
       it 'returns http bad_request' do
-        post :create, params: { reservation: { flight_id: flight.id, passengers_attributes: [attributes_for(:passenger, seat: nil)] } }
+        post :create, params: { token: stripe_token, reservation: { flight_id: flight.id, passengers_attributes: [attributes_for(:passenger, seat: nil)] } }
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+
+    context 'when no card provided for payment' do
+      it 'returns http bad_request' do
+        post :create, params: { reservation: { flight_id: flight.id, passengers_attributes: [attributes_for(:passenger)] } }
         expect(response).to have_http_status(:bad_request)
       end
     end
