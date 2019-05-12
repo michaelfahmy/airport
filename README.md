@@ -16,3 +16,6 @@
 
 ## Development
 Run `rails s`
+
+## Testing
+Run `rspec`
