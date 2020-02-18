@@ -1,4 +1,4 @@
-# UALA Airport
+# Airport Management Portal
 
 ## Requirements:
 * Ruby 2.6.3
