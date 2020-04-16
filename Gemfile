@@ -49,6 +49,7 @@ end
 group :development do
   gem 'bullet'
   gem 'rubocop'
+  gem 'rubocop-performance'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
