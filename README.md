@@ -1,4 +1,5 @@
 # Airport Management Portal
+[![CircleCI](https://circleci.com/gh/michaelfahmy/airport.svg?style=shield)](https://app.circleci.com/pipelines/github/michaelfahmy/airport)
 
 ## Requirements:
 * Ruby 2.6.6
