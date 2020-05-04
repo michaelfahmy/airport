@@ -22,7 +22,7 @@ jobs:
             - airport-bundle-
       - run:
           name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
+          command: bundle install --path vendor/bundle
       - save_cache:
           paths:
             - vendor/bundle
