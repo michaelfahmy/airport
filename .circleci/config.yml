@@ -23,7 +23,7 @@ jobs:
             - airport-bundle-
       - run:
           name: Bundle Install
-          command: bundle install --path vendor/bundle
+          command: bundle check --path vendor/bundle || bundle install --deployment
       - save_cache:
           paths:
             - vendor/bundle
@@ -33,7 +33,10 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Database Setup
-          command: rails db:schema:load --trace
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Rubocop
+          command: rubocop --parallel
       - run:
           name: Run Rspec in parallel
           command: |

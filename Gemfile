@@ -39,6 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'faker'
+  gem 'rubocop'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
@@ -48,7 +49,6 @@ end
 
 group :development do
   gem 'bullet'
-  gem 'rubocop'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
