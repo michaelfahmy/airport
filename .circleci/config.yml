@@ -6,6 +6,9 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.6
+        environment:
+          BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
     steps:
       - checkout
       - run:
