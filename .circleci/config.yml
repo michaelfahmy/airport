@@ -2,15 +2,17 @@ version: 2.1
 
 jobs:
   build:
+    working_directory: ~/airport
     docker:
       - image: circleci/ruby:2.6.6-stretch-node
         environment:
+          PGHOST: localhost
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
-      # - image: circleci/postgres:12.2
-      #   environment:
-      #     POSTGRES_DB: airport_test
-      #     POSTGRES_HOST_AUTH_METHOD: trust
+      - image: circleci/postgres:12.2
+        environment:
+          POSTGRES_DB: airport_test
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - checkout
       - run:
@@ -27,22 +29,22 @@ jobs:
           paths:
             - vendor/bundle
           key: airport-bundle-{{ checksum "Gemfile.lock" }}
-      # - run:
-      #     name: Wait for DB
-      #     command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      # - run:
-      #     name: Database Setup
-      #     command: bin/rails db:schema:load --trace
       - run:
           name: Rubocop
           command: bundle exec rubocop --parallel
-      # - run:
-      #     name: Run Rspec in parallel
-      #     command: |
-      #       bundle exec rspec --profile 10 \
-      #                         --format RspecJunitFormatter \
-      #                         --out test_results/rspec.xml \
-      #                         --format progress \
-      #                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-      # - store_test_results:
-      #     path: test_results
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database Setup
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Run Rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_test_results:
+          path: test_results
