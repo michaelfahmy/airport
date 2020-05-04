@@ -35,7 +35,7 @@ jobs:
       #     command: bin/rails db:schema:load --trace
       - run:
           name: Rubocop
-          command: rubocop --parallel
+          command: bundle exec rubocop --parallel
       # - run:
       #     name: Run Rspec in parallel
       #     command: |
