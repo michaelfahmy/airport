@@ -2,7 +2,6 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/airport
     docker:
       - image: circleci/ruby:2.6.6-stretch-node
         environment:
