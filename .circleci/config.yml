@@ -7,7 +7,6 @@ jobs:
       - image: circleci/ruby:2.6.6-stretch-node
         environment:
           PGHOST: localhost
-          BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
       - image: circleci/postgres:12.2
         environment:
@@ -24,7 +23,7 @@ jobs:
             - airport-bundle-
       - run:
           name: Bundle Install
-          command: bundle install --path vendor/bundle
+          command: bundle check || bundle install --jobs=4 --retry=3
       - save_cache:
           paths:
             - vendor/bundle
@@ -39,7 +38,7 @@ jobs:
           name: Database Setup
           command: bin/rails db:schema:load --trace
       - run:
-          name: Run Rspec in parallel
+          name: Rspec
           command: |
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
