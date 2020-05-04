@@ -11,7 +11,7 @@ jobs:
           RAILS_ENV: test
       - image: circleci/postgres:12.2
         environment:
-          POSTGRES_USER: airport
+          POSTGRES_USER: root
           POSTGRES_DB: airport_test
           POSTGRES_HOST_AUTH_METHOD: trust
     steps:
