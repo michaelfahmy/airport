@@ -1,0 +1,51 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.6-stretch-node
+        environment:
+          PGHOST: localhost
+          PGUSER: root
+          BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
+      - image: circleci/postgres:12.2
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: airport_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+    steps:
+      - checkout
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - restore_cache:
+          keys:
+            - airport-bundle-{{ checksum "Gemfile.lock" }}
+            - airport-bundle-
+      - run:
+          name: Bundle Install
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: airport-bundle-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop --parallel
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database Setup
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Rspec
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_test_results:
+          path: test_results
