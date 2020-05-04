@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  ruby: circleci/ruby@0.2.2
 
 jobs:
   build:
@@ -11,15 +9,38 @@ jobs:
           RAILS_ENV: test
       - image: circleci/postgres:12.2
         environment:
+          POSTGRES_USER: airport
           POSTGRES_DB: airport_test
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: ''
     steps:
       - checkout
       - run:
           name: Which bundler?
           command: bundle -v
-      - ruby/load-cache
-      - ruby/install-deps
-      - ruby/save-cache
-      - ruby/run-tests
+      - restore_cache:
+          keys:
+            - airport-bundle-{{ checksum "Gemfile.lock" }}
+            - airport-bundle-
+      - run:
+          name: Bundle Install
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: airport-bundle-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database Setup
+          command: rails db:schema:load --trace
+      - run:
+          name: Run Rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_test_results:
+          path: test_results

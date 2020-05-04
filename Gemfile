@@ -40,7 +40,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
-  gem 'rspec_junit_formatter'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -64,6 +63,7 @@ group :development do
 end
 
 group :test do
+  gem 'rspec_junit_formatter'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
