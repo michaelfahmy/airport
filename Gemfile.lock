@@ -68,8 +68,6 @@ GEM
       rails (>= 4.0.0)
     arbre (1.2.1)
       activesupport (>= 3.0.0)
-    archive-zip (0.12.0)
-      io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
     babel-source (5.8.35)
@@ -103,9 +101,6 @@ GEM
       activesupport
     childprocess (1.0.1)
       rake (< 13.0)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -152,7 +147,6 @@ GEM
       has_scope (~> 0.6)
       railties (>= 5.0, < 6.0)
       responders (~> 2.0)
-    io-like (0.3.0)
     jaro_winkler (1.5.2)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
@@ -296,6 +290,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.6)
+    rubocop-performance (1.3.0)
+      rubocop (>= 0.68.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
@@ -351,6 +347,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webdrivers (4.1.2)
+      nokogiri (~> 1.6)
+      rubyzip (~> 1.0)
+      selenium-webdriver (>= 3.0, < 4.0)
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -371,7 +371,6 @@ DEPENDENCIES
   bullet
   byebug
   capybara (>= 2.15)
-  chromedriver-helper
   coffee-rails (~> 4.2)
   devise
   factory_bot_rails
@@ -388,6 +387,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   rubocop
+  rubocop-performance
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
@@ -397,6 +397,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webdrivers
 
 RUBY VERSION
    ruby 2.6.6p146
