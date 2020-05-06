@@ -1,4 +1,6 @@
 ActiveAdmin.register Airplane do
+  includes :airline
+
   permit_params :model, :business_class_rows, :economy_class_rows, :seats_per_row
 
   filter :model_contains
