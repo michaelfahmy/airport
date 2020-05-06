@@ -18,8 +18,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Which bundler?
-          command: bundle -v
+          name: Configure Bundler
+          command: gem install bundler
       - restore_cache:
           keys:
             - airport-bundle-{{ checksum "Gemfile.lock" }}
